@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Questions</title>
+</head>
+<body>
+
+  <h2>Create Questions</h2>
+
+  <form id="questionsForm" action="/create_quiz/questions" method="post">
+    <div id="questionsContainer"></div>
+    <button type="button" onclick="addQuestion()">Add Question</button>
+    <button type="submit">Submit Questions</button>
+  </form>
+
+  <script>
+    let questionCounter = 0;
+
+    function addQuestion() {
+      questionCounter++;
+
+      const container = document.getElementById('questionsContainer');
+
+      const questionDiv = document.createElement('div');
+      questionDiv.innerHTML = `
+        <h3>Question ${questionCounter}</h3>
+        <label for="questions[${questionCounter}][questionType]">Question Type:</label>
+        <select id="questions[${questionCounter}][questionType]" name="questions[${questionCounter}][questionType]" required>
+          <option value="text">Text</option>
+          <option value="url">URL</option>
+          <option value="text&url">Text & URL</option>
+        </select>
+        <br>
+        <label for="questions[${questionCounter}][textQuestion]">Text Question:</label>
+        <input type="text" id="questions[${questionCounter}][textQuestion]" name="questions[${questionCounter}][textQuestion]" required>
+        <br>
+        <label for="questions[${questionCounter}][urlQuestion]">URL Question:</label>
+        <input type="text" id="questions[${questionCounter}][urlQuestion]" name="questions[${questionCounter}][urlQuestion]" required>
+        <br>
+        <label for="questions[${questionCounter}][options]">Options (comma-separated):</label>
+        <input type="text" id="questions[${questionCounter}][options]" name="questions[${questionCounter}][options]" required>
+        <br><br>
+      `;
+
+      container.appendChild(questionDiv);
+    }
+  </script>
+
+</body>
+</html>
